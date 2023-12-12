@@ -4,6 +4,8 @@ Pokepedia 2.0 is an enhanced version of the Pokepedia application that allows us
 
 **[Pokepedia 1.0 Reference](https://github.com/OscarNavarrolol/PokePedia-1.0.git)**
 
+[![PokeImg](https://i.postimg.cc/k490WrtH/descargar.png)](https://postimg.cc/R3spzDd1)
+
 ## Features
 
 - **Data Exploration:** Retrieve detailed data for each Pokémon from the PokeAPI.
