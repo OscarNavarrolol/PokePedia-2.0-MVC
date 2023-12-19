@@ -27,10 +27,27 @@ import javax.swing.JOptionPane;
  */
 public class PrincipalPoke extends javax.swing.JFrame {
     private PokemonController controller;
-
-
+    private ApiConnector api; 
+    public int currentPokemonIndex ;
+    
     public PrincipalPoke() {
         initComponents();
+        currentPokemonIndex = 1;
+        api = new ApiConnector();
+        String nameLabelText = nameLabel.getText();
+        String typeLabelText = typeLabel.getText();
+        String imgLabelText = imgLabel.getText();
+        controller = new PokemonController(api, this, nameLabelText, typeLabelText, imgLabelText);
+
+        // Cargas la información del primer Pokémon al inicializar la interfaz
+        try {
+            Pokemon firstPokemon = controller.showPokemonInfo(currentPokemonIndex); // Cargar información del primer Pokémon
+            displayPokemonInfo(firstPokemon); // Mostrar la información en la interfaz
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(PrincipalPoke.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+        
         
     }
 
@@ -60,6 +77,8 @@ public class PrincipalPoke extends javax.swing.JFrame {
         nameLabel = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         imgLabel = new javax.swing.JLabel();
+        btNext = new javax.swing.JButton();
+        btBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -203,25 +222,45 @@ public class PrincipalPoke extends javax.swing.JFrame {
         imgLabel.setText("jLabel8");
         jPanel5.add(imgLabel);
 
+        btNext.setText("Next");
+        btNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNextActionPerformed(evt);
+            }
+        });
+
+        btBack.setText("Back");
+        btBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(384, 384, 384)
                                 .addComponent(nameLabel)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addComponent(typeLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(90, 90, 90)))
+                        .addGap(90, 90, 90))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(169, 169, 169)
+                        .addComponent(btBack, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btNext, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(182, 182, 182)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -249,7 +288,11 @@ public class PrincipalPoke extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(112, 112, 112)
                                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btNext, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btBack, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(45, 45, 45))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -275,6 +318,7 @@ public class PrincipalPoke extends javax.swing.JFrame {
         try {
         int code = Integer.parseInt(txtCodePoke.getText());
         controller.searchCodePoke(code);
+        
         }catch (MalformedURLException ex) {
             Logger.getLogger(PrincipalPoke.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -288,10 +332,31 @@ public class PrincipalPoke extends javax.swing.JFrame {
             Logger.getLogger(PrincipalPoke.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btSearchByNumberActionPerformed
+
+    private void btNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextActionPerformed
+        try {
+            currentPokemonIndex += 1;
+            Pokemon firstPokemon = controller.showPokemonInfo(currentPokemonIndex);
+            displayPokemonInfo(firstPokemon);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(PrincipalPoke.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btNextActionPerformed
+
+    private void btBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBackActionPerformed
+         try {
+             currentPokemonIndex -= 1;
+            Pokemon firstPokemon = controller.showPokemonInfo(currentPokemonIndex);
+            displayPokemonInfo(firstPokemon);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(PrincipalPoke.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btBackActionPerformed
     
     public void displayPokemonInfo(Pokemon pokemon) {
         nameLabel.setText("Name: " + pokemon.getName());
         List<String> types = pokemon.getTypes();
+        List<String> abilities = pokemon.getAbilities();
         if (types.size() == 1) {
             typeLabel.setText("Type: " + types.get(0));
             typeLabel.setForeground(controller.getColorForType(types.get(0)));
@@ -324,6 +389,8 @@ public class PrincipalPoke extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btBack;
+    private javax.swing.JButton btNext;
     private javax.swing.JButton btSearchByNumber;
     private javax.swing.JLabel imgLabel;
     private javax.swing.JButton jButton1;

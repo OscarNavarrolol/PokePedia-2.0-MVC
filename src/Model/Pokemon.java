@@ -16,7 +16,7 @@ public class Pokemon {
     private List<String> types;
     private String imageUrl;
     private List<String> abilities;
-    private Image pokemonImage; // Campo para almacenar la imagen
+    private Image pokemonImage; 
 
     public Pokemon() {
     }

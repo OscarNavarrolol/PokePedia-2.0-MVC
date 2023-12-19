@@ -19,10 +19,11 @@ import javax.swing.ImageIcon;
 public class PokemonController {
     private ApiConnector apiConnector;
     private PrincipalPoke principalPoke;
-    private int currentPokemonIndex; // el indice inicial NO TOCAR
+     // el indice inicial NO TOCAR
     private String nameLabel;
     private String  typeLabel;
     private String imgLabel;
+    
     
 
 
@@ -33,11 +34,13 @@ public class PokemonController {
     
     
     public PokemonController(ApiConnector apiConnector, PrincipalPoke principalPoke, String nameLabel, String typeLabel, String imgLabel) {
-        this.apiConnector = apiConnector;
-        this.principalPoke = principalPoke;
-        this.nameLabel = nameLabel;
-        this.typeLabel = typeLabel;
-        this.imgLabel = imgLabel;
+    this.apiConnector = apiConnector;
+    this.principalPoke = principalPoke;
+    this.nameLabel = nameLabel; // Debe ser de tipo String, no JLabel
+    this.typeLabel = typeLabel; // Debe ser de tipo String, no JLabel
+    this.imgLabel = imgLabel;   // Debe ser de tipo String, no JLabel
+    ApiConnector api = new ApiConnector();
+    api.getPokemonData(150);
     }
 
     public void searchPokemonByName(String name) throws MalformedURLException {
@@ -61,7 +64,7 @@ public class PokemonController {
     }
     
      // Método para mostrar la información del Pokémon en la vista
-    private Pokemon showPokemonInfo(int index) throws MalformedURLException {
+    public Pokemon showPokemonInfo(int index) throws MalformedURLException {
     ApiConnector apiConnector = new ApiConnector();
     String name = apiConnector.getPokemonName(index);
     List<String> types = apiConnector.getPokemonTypes(index);
