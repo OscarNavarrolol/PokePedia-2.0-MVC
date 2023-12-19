@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/USUARIO/Documents/NetBeansProjects/PokeMVC/src/View/PrincipalPoke.java</file>
-            <file>file:/C:/Users/USUARIO/Documents/NetBeansProjects/PokeMVC/src/Model/ApiConnector.java</file>
-            <file>file:/C:/Users/USUARIO/Documents/NetBeansProjects/PokeMVC/src/Controller/PokemonController.java</file>
-            <file>file:/C:/Users/USUARIO/Documents/NetBeansProjects/PokeMVC/src/Model/Pokemon.java</file>
+            <file>file:/C:/Users/USUARIO/Documents/NetBeansProjects/PokePedia-2.0-MVC/src/Model/Pokemon.java</file>
+            <file>file:/C:/Users/USUARIO/Documents/NetBeansProjects/PokePedia-2.0-MVC/src/Controller/PokemonController.java</file>
+            <file>file:/C:/Users/USUARIO/Documents/NetBeansProjects/PokePedia-2.0-MVC/src/View/PrincipalPoke.java</file>
+            <file>file:/C:/Users/USUARIO/Documents/NetBeansProjects/PokePedia-2.0-MVC/src/Model/ApiConnector.java</file>
         </group>
     </open-files>
 </project-private>
