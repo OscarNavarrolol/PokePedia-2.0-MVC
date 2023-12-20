@@ -46,7 +46,10 @@ public class PokemonController {
     public void searchPokemonByName(String name) throws MalformedURLException {
         int index = apiConnector.getPokemonIndexByName(name);
         if (index != -1) {
-            showPokemonInfo(index);
+//            showPokemonInfo(index);
+            Pokemon pokemon = showPokemonInfo(index); 
+            principalPoke.displayPokemonInfo(pokemon);
+            
         } else {
             //  no se encuentra
             System.out.println("Pokémon no encontrado");
@@ -56,6 +59,7 @@ public class PokemonController {
     public void searchCodePoke (int codePok) throws MalformedURLException{
         int index = codePok;
         try {
+            
             showPokemonInfo(index);
         } catch (Exception e) {
             e.printStackTrace();

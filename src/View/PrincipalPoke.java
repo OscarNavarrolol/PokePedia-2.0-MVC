@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+// import the other packages
 package View;
 import Controller.*;
 import Model.ApiConnector;
@@ -21,11 +18,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-/**
- *
- * @author USUARIO
- */
+
+
 public class PrincipalPoke extends javax.swing.JFrame {
+    
     private PokemonController controller;
     private ApiConnector api; 
     public int currentPokemonIndex ;
@@ -66,7 +62,7 @@ public class PrincipalPoke extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btSearchName = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtCodePoke = new javax.swing.JTextField();
         btSearchByNumber = new javax.swing.JButton();
@@ -117,10 +113,10 @@ public class PrincipalPoke extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Search by name");
 
-        jButton2.setText("Search");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btSearchName.setText("Search");
+        btSearchName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btSearchNameActionPerformed(evt);
             }
         });
 
@@ -157,7 +153,7 @@ public class PrincipalPoke extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(35, 35, 35))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(btSearchName)
                         .addGap(77, 77, 77))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -175,7 +171,7 @@ public class PrincipalPoke extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btSearchName)
                 .addGap(95, 95, 95)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -314,23 +310,27 @@ public class PrincipalPoke extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-        int code = Integer.parseInt(txtCodePoke.getText());
-        controller.searchCodePoke(code);
-        
-        }catch (MalformedURLException ex) {
-            Logger.getLogger(PrincipalPoke.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void btSearchByNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchByNumberActionPerformed
+    private void btSearchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchNameActionPerformed
         String name = txtName.getText();
         try {
             controller.searchPokemonByName(name);
+            
         } catch (MalformedURLException ex) {
             Logger.getLogger(PrincipalPoke.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+    }//GEN-LAST:event_btSearchNameActionPerformed
+
+    private void btSearchByNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchByNumberActionPerformed
+        try {
+        int code = Integer.parseInt(txtCodePoke.getText());
+//        controller.searchCodePoke(code);
+        Pokemon firstPokemon = controller.showPokemonInfo(code);
+        displayPokemonInfo(firstPokemon);
+        }catch (MalformedURLException ex) {
+            Logger.getLogger(PrincipalPoke.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_btSearchByNumberActionPerformed
 
     private void btNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextActionPerformed
@@ -392,9 +392,9 @@ public class PrincipalPoke extends javax.swing.JFrame {
     private javax.swing.JButton btBack;
     private javax.swing.JButton btNext;
     private javax.swing.JButton btSearchByNumber;
+    private javax.swing.JButton btSearchName;
     private javax.swing.JLabel imgLabel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
