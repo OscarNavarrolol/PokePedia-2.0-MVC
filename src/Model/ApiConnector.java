@@ -18,8 +18,9 @@ import org.json.JSONArray;
 
 public class ApiConnector {
     
-    
+  // Method to fetch data from the specified API URL  
   private String fetchData(String apiUrl) throws IOException {
+        // Logic to make an HTTP request and retrieve data from the API
         StringBuilder result = new StringBuilder();
 
         try {
@@ -42,38 +43,38 @@ public class ApiConnector {
         return result.toString();
     }
   
-  public String getPokemonData(int numberOfPokemon) {
-        // URL de la PokeAPI 
-        String apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=" + numberOfPokemon;
-
-        StringBuilder result = new StringBuilder();
-
-        try {
-            //conexión HTTP
-            URL url = new URL(apiUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            // Configurar
-            connection.setRequestMethod("GET");
-
-            // respuesta
-            InputStream inputStream = connection.getInputStream();
-            Scanner scanner = new Scanner(inputStream);
-
-            while (scanner.hasNextLine()) {
-                result.append(scanner.nextLine());
-            }
-
-            scanner.close();
-            inputStream.close();
-            connection.disconnect();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return result.toString();
-    }  
+//  public String getPokemonData(int numberOfPokemon) {
+//        
+//        String apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=" + numberOfPokemon;
+//
+//        StringBuilder result = new StringBuilder();
+//
+//        try {
+//            //conexión HTTP
+//            URL url = new URL(apiUrl);
+//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//
+//            // Configurar
+//            connection.setRequestMethod("GET");
+//
+//            // respuesta
+//            InputStream inputStream = connection.getInputStream();
+//            Scanner scanner = new Scanner(inputStream);
+//
+//            while (scanner.hasNextLine()) {
+//                result.append(scanner.nextLine());
+//            }
+//
+//            scanner.close();
+//            inputStream.close();
+//            connection.disconnect();
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return result.toString();
+//    }  
 
     public String getPokemonName(int index) {
         String apiUrl = "https://pokeapi.co/api/v2/pokemon/" + index;

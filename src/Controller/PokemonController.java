@@ -40,7 +40,7 @@ public class PokemonController {
     this.typeLabel = typeLabel; // Debe ser de tipo String, no JLabel
     this.imgLabel = imgLabel;   // Debe ser de tipo String, no JLabel
     ApiConnector api = new ApiConnector();
-    api.getPokemonData(150);
+//    api.getPokemonData(150);
     }
 
     public void searchPokemonByName(String name) throws MalformedURLException {
