@@ -19,7 +19,7 @@ import org.json.JSONArray;
 public class ApiConnector {
     
   // Method to fetch data from the specified API URL  
-  private String fetchData(String apiUrl) throws IOException {
+    private String fetchData(String apiUrl) throws IOException {
         // Logic to make an HTTP request and retrieve data from the API
         StringBuilder result = new StringBuilder();
 
@@ -37,46 +37,15 @@ public class ApiConnector {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            throw e; // no recuerdo pa que pero importa
+            throw e; 
         }
 
         return result.toString();
-    }
-  
-//  public String getPokemonData(int numberOfPokemon) {
-//        
-//        String apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=" + numberOfPokemon;
-//
-//        StringBuilder result = new StringBuilder();
-//
-//        try {
-//            //conexión HTTP
-//            URL url = new URL(apiUrl);
-//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//
-//            // Configurar
-//            connection.setRequestMethod("GET");
-//
-//            // respuesta
-//            InputStream inputStream = connection.getInputStream();
-//            Scanner scanner = new Scanner(inputStream);
-//
-//            while (scanner.hasNextLine()) {
-//                result.append(scanner.nextLine());
-//            }
-//
-//            scanner.close();
-//            inputStream.close();
-//            connection.disconnect();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return result.toString();
-//    }  
-
+    }  
+    
+    // Retrieves the name of a Pokemon by its index
     public String getPokemonName(int index) {
+        // Fetches data and extracts the name of the Pokemon
         String apiUrl = "https://pokeapi.co/api/v2/pokemon/" + index;
         String name = "";
 
@@ -92,7 +61,9 @@ public class ApiConnector {
         return name;
     }
     
+    // Retrieves the types of a Pokemon by its index
     public List<String> getPokemonTypes(int index) {
+        // Fetches data and extracts the types of the Pokemon
         String apiUrl = "https://pokeapi.co/api/v2/pokemon/" + index;
         List<String> types = new ArrayList<>();
 
@@ -115,21 +86,25 @@ public class ApiConnector {
         return types;
     }
     
+    // Retrieves the index of a Pokemon by its name
     public int getPokemonIndexByName(String name) {
-    int index = -1;
+        // Fetches data and extracts the index of the Pokemon by name
+        int index = -1;
 
-    try {
-        String apiUrl = "https://pokeapi.co/api/v2/pokemon/" + name;
-        String result = fetchData(apiUrl);
-        JSONObject jsonObject = new JSONObject(result);
-        index = jsonObject.getInt("id");
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    return index;
-    }
+        try {
+            String apiUrl = "https://pokeapi.co/api/v2/pokemon/" + name;
+            String result = fetchData(apiUrl);
+            JSONObject jsonObject = new JSONObject(result);
+            index = jsonObject.getInt("id");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return index;
+        }
     
+    // Retrieves the image URL of a Pokemon by its index
     public String getPokemonImage(int index) {
+        // Fetches data and extracts the image URL of the Pokemon
         String apiUrl = "https://pokeapi.co/api/v2/pokemon/" + index;
         String imageUrl = "";
 
@@ -148,8 +123,10 @@ public class ApiConnector {
         return imageUrl;
     }
     
-    
+     // Retrieves the abilities of a Pokemon by its index
     public List<String> getPokemonAbilities (int index) {
+        
+        // Fetches data and extracts the abilities of the Pokemon
         String apiUrl = "https://pokeapi.co/api/v2/pokemon/" + index;
         List<String> abilities = new ArrayList<>();
 
@@ -157,7 +134,7 @@ public class ApiConnector {
             String result = fetchData(apiUrl);
             JSONObject jsonObject = new JSONObject(result);
 
-            // Obtener habilidades del Pokémon
+            // get abilities of pokemon
             JSONArray abilitiesArray = jsonObject.getJSONArray("abilities");
             for (int i = 0; i < abilitiesArray.length(); i++) {
                 JSONObject abilityObject = abilitiesArray.getJSONObject(i);

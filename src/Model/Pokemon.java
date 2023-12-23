@@ -19,7 +19,7 @@ public class Pokemon {
 
     public Pokemon() {
     }
-    
+  
     /*
      * Constructor of the Pokemon class that takes in the Pokemon's attributes.
      */

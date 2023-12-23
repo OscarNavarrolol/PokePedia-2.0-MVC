@@ -1,4 +1,5 @@
-// import the other packages
+/*This class represents the main graphical interface for the Pokédex application. */
+
 package View;
 import Controller.*;
 import Model.ApiConnector;
@@ -22,10 +23,12 @@ import javax.swing.JOptionPane;
 
 public class PrincipalPoke extends javax.swing.JFrame {
     
+    // Declare necessary class variables
     private PokemonController controller;
     private ApiConnector api; 
     public int currentPokemonIndex ;
     
+    // Constructor initializing the UI components and default Pokemon details
     public PrincipalPoke() {
         initComponents();
         currentPokemonIndex = 1;
@@ -35,16 +38,15 @@ public class PrincipalPoke extends javax.swing.JFrame {
         String imgLabelText = imgLabel.getText();
         controller = new PokemonController(api, this, nameLabelText, typeLabelText, imgLabelText);
 
-        // Cargas la información del primer Pokémon al inicializar la interfaz
+        // Load the information of the first Pokémon upon initializing the interface
+
         try {
-            Pokemon firstPokemon = controller.showPokemonInfo(currentPokemonIndex); // Cargar información del primer Pokémon
-            displayPokemonInfo(firstPokemon); // Mostrar la información en la interfaz
+            Pokemon firstPokemon = controller.showPokemonInfo(currentPokemonIndex); 
+            displayPokemonInfo(firstPokemon); 
         } catch (MalformedURLException ex) {
             Logger.getLogger(PrincipalPoke.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-        
-        
+ 
     }
 
     public void setController(PokemonController controller) {
@@ -68,7 +70,7 @@ public class PrincipalPoke extends javax.swing.JFrame {
         btSearchByNumber = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btExit = new javax.swing.JButton();
         typeLabel = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -150,19 +152,18 @@ public class PrincipalPoke extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCodePoke)
                     .addComponent(txtName)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(29, 29, 29))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                            .addComponent(btSearchByNumber)
-                            .addGap(70, 70, 70))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(37, 37, 37))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                            .addComponent(btSearchName)
-                            .addGap(71, 71, 71))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(29, 29, 29))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(btSearchByNumber)
+                        .addGap(70, 70, 70))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(37, 37, 37))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(btSearchName)
+                        .addGap(71, 71, 71)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -187,10 +188,10 @@ public class PrincipalPoke extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
 
-        jButton1.setText("Exit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btExit.setText("Exit");
+        btExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btExitActionPerformed(evt);
             }
         });
 
@@ -200,14 +201,14 @@ public class PrincipalPoke extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btExit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btExit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -331,12 +332,14 @@ public class PrincipalPoke extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    
+    // Method handling the "Exit" button click event
+    private void btExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExitActionPerformed
         JOptionPane.showMessageDialog(null, "Thank you for using my program :)");
         System.exit(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    }//GEN-LAST:event_btExitActionPerformed
+    
+    // Retrieve the entered name and search for a Pokémon by that name
     private void btSearchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchNameActionPerformed
         String name = txtName.getText();
         try {
@@ -347,44 +350,49 @@ public class PrincipalPoke extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btSearchNameActionPerformed
-
+    
+    // Retrieve the entered code and search for a Pokémon by that code
     private void btSearchByNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchByNumberActionPerformed
         try {
         int code = Integer.parseInt(txtCodePoke.getText());
 //        controller.searchCodePoke(code);
-        Pokemon firstPokemon = controller.showPokemonInfo(code);
-        displayPokemonInfo(firstPokemon);
+        Pokemon pokemonMoment = controller.showPokemonInfo(code);
+        displayPokemonInfo(pokemonMoment);
         }catch (MalformedURLException ex) {
             Logger.getLogger(PrincipalPoke.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btSearchByNumberActionPerformed
-
+    
+    // Display the details of the next Pokémon
     private void btNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextActionPerformed
         try {
             currentPokemonIndex += 1;
-            Pokemon firstPokemon = controller.showPokemonInfo(currentPokemonIndex);
-            displayPokemonInfo(firstPokemon);
+            Pokemon pokemonMoment = controller.showPokemonInfo(currentPokemonIndex);
+            displayPokemonInfo(pokemonMoment);
         } catch (MalformedURLException ex) {
             Logger.getLogger(PrincipalPoke.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btNextActionPerformed
 
+    // Display the details of the previous Pokémon
     private void btBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBackActionPerformed
          try {
-             currentPokemonIndex -= 1;
-            Pokemon firstPokemon = controller.showPokemonInfo(currentPokemonIndex);
-            displayPokemonInfo(firstPokemon);
+            currentPokemonIndex -= 1;
+            Pokemon pokemonMoment = controller.showPokemonInfo(currentPokemonIndex);
+            displayPokemonInfo(pokemonMoment);
         } catch (MalformedURLException ex) {
             Logger.getLogger(PrincipalPoke.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btBackActionPerformed
     
+    // Method to display information of the provided Pokémon on the UI
     public void displayPokemonInfo(Pokemon pokemon) {
+        // Display Pokémon details on UI components
         nameLabel.setText("Name: " + pokemon.getName());
         List<String> types = pokemon.getTypes();
         List<String> abilities = pokemon.getAbilities();
-        // vaina nueva cuidado
+        // Check for abilities and types, update UI accordingly
         if (abilities.size() >= 1) {
             abiliti1.setText("Ability 1: " + abilities.get(0));
         } else {
@@ -409,7 +417,6 @@ public class PrincipalPoke extends javax.swing.JFrame {
             abiliti4.setText("Ability 4: -");
         }
 
-        // vaina nueva cuidado
         if (types.size() == 1) {
             typeLabel.setText("Type: " + types.get(0));
             typeLabel.setForeground(controller.getColorForType(types.get(0)));
@@ -426,9 +433,6 @@ public class PrincipalPoke extends javax.swing.JFrame {
         Image pokemonImage = pokemon.getPokemonImage();
         imgLabel.setIcon(new ImageIcon(pokemonImage));
     }
-
-    
-    
 
     public static void main(String args[]) {
         
@@ -447,11 +451,11 @@ public class PrincipalPoke extends javax.swing.JFrame {
     private javax.swing.JLabel abiliti3;
     private javax.swing.JLabel abiliti4;
     private javax.swing.JButton btBack;
+    private javax.swing.JButton btExit;
     private javax.swing.JButton btNext;
     private javax.swing.JButton btSearchByNumber;
     private javax.swing.JButton btSearchName;
     private javax.swing.JLabel imgLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
