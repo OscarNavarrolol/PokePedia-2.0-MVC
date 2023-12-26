@@ -20,10 +20,10 @@ Pokepedia 2.0 is an enhanced version of the Pokepedia application that allows us
 - Principal
 [![Principal-2](https://i.postimg.cc/LstkP2tt/Screenshot-2.png)](https://postimg.cc/f3b0n4gy)
 - Search
-[![Search-Name](https://i.postimg.cc/sDb50vKP/Screenshot-3.png)](https://postimg.cc/kBFV2M0D)
-[![Search-performed](https://i.postimg.cc/zfzvdNmS/Screenshot-4.png)](https://postimg.cc/xXZ9CW1c)
-[![Search-Number](https://i.postimg.cc/j20WKk3M/Screenshot-5.png)](https://postimg.cc/gXscH4Wh)
-[![Search-performed](https://i.postimg.cc/NFk0tGH0/Screenshot-6.png)](https://postimg.cc/XBXWcbxM)
+(https://i.postimg.cc/sDb50vKP/Screenshot-3.png)](https://postimg.cc/kBFV2M0D)
+(https://i.postimg.cc/zfzvdNmS/Screenshot-4.png)](https://postimg.cc/xXZ9CW1c)
+(https://i.postimg.cc/j20WKk3M/Screenshot-5.png)](https://postimg.cc/gXscH4Wh)
+(https://i.postimg.cc/NFk0tGH0/Screenshot-6.png)](https://postimg.cc/XBXWcbxM)
 
 ## Technologies Used
 
