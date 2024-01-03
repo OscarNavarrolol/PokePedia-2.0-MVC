@@ -53,7 +53,7 @@ Pokepedia 2.0 is an enhanced version of the Pokepedia application that allows us
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Mail
 - oscardnv123455@gmail.com
