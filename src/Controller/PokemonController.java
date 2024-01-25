@@ -9,6 +9,8 @@ import java.net.URL;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Controller class managing interactions between the Model (Pokemon data) and View (User interface).
@@ -22,6 +24,7 @@ public class PokemonController {
     private String  typeLabel;
     private String imgLabel;
     
+    private static final Map<String, Color> typeColorMap = initializeTypeColorMap();
     
     public PokemonController(ApiConnector apiConnector, PrincipalPoke principalPoke, String nameLabel, String typeLabel, String imgLabel) {
     // Initializing components and API connector
@@ -99,48 +102,32 @@ public class PokemonController {
     }
 
     // Gets color based on Pokemon type
-    public Color getColorForType(String type) {
-        // Returns a color based on the Pokemon's type
-        switch (type.toLowerCase()) {
-            case "fire":
-                return Color.ORANGE; 
-            case "water":
-                return Color.CYAN; 
-            case "grass":
-                return Color.GREEN.darker().darker(); 
-            case "normal":
-                return new Color(160, 160, 160); 
-            case "flying":
-                return new Color(135, 206, 235); 
-            case "fighting":
-                return new Color(205, 92, 92); 
-            case "poison" :
-                return new Color(138, 43, 226); 
-            case "electric":
-                return Color.YELLOW.darker().darker(); 
-            case "ground":
-                return new Color(139, 69, 19); 
-            case "rock":
-                return new Color(169, 169, 169); 
-            case "psychic":
-                return new Color(186, 85, 211); 
-            case "ice":
-                return new Color(135, 206, 250); 
-            case "bug":
-                return new Color(154, 205, 50); 
-            case "ghost":
-                return new Color(128, 0, 128); 
-            case "steel":
-                return new Color(192, 192, 192); 
-            case "dragon":
-                return new Color(70, 130, 180); 
-            case "dark":
-                return new Color(47, 79, 79); 
-            case "fairy":
-                return new Color(255, 182, 193); 
-            default:
-                return Color.BLACK; // default
-        }
+    private static Map<String, Color> initializeTypeColorMap() {
+        Map<String, Color> map = new HashMap<>();
+        map.put("fire", Color.ORANGE);
+        map.put("water", Color.CYAN);
+        map.put("grass", Color.GREEN.darker().darker());
+        map.put("normal", new Color(160, 160, 160));
+        map.put("flying", new Color(135, 206, 235));
+        map.put("fighting", new Color(205, 92, 92));
+        map.put("poison", new Color(138, 43, 226));
+        map.put("electric", Color.YELLOW.darker().darker());
+        map.put("ground", new Color(139, 69, 19));
+        map.put("rock", new Color(169, 169, 169));
+        map.put("psychic", new Color(186, 85, 211));
+        map.put("ice", new Color(135, 206, 250));
+        map.put("bug", new Color(154, 205, 50));
+        map.put("ghost", new Color(128, 0, 128));
+        map.put("steel", new Color(192, 192, 192));
+        map.put("dragon", new Color(70, 130, 180));
+        map.put("dark", new Color(47, 79, 79));
+        map.put("fairy", new Color(255, 182, 193));
+        return map;
     }
+    
+     public Color getColorForType(String type) {
+        return typeColorMap.getOrDefault(type.toLowerCase(), Color.BLACK);
+    }
+     
     
 }
