@@ -381,6 +381,7 @@ public class PrincipalPoke extends javax.swing.JFrame {
             controller.searchPokemonByName(name);
             
         } catch (MalformedURLException ex) {
+            JOptionPane.showMessageDialog(this, "Error: Invalid URL", "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(PrincipalPoke.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -388,13 +389,20 @@ public class PrincipalPoke extends javax.swing.JFrame {
     
     // Retrieve the entered code and search for a Pokémon by that code
     private void btSearchByNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchByNumberActionPerformed
+   
         try {
         int code = Integer.parseInt(txtCodePoke.getText());
+        if (code >= 1 && code <= 898) {
 //        controller.searchCodePoke(code);
         currentPokemonIndex = code;
         Pokemon pokemonMoment = controller.showPokemonInfo(code);
-        displayPokemonInfo(pokemonMoment);
-        }catch (MalformedURLException ex) {
+        displayPokemonInfo(pokemonMoment); 
+           }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Error: Please enter a valid number", "Error", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(PrincipalPoke.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            JOptionPane.showMessageDialog(this, "Error: Invalid URL", "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(PrincipalPoke.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -407,6 +415,7 @@ public class PrincipalPoke extends javax.swing.JFrame {
             Pokemon pokemonMoment = controller.showPokemonInfo(currentPokemonIndex);
             displayPokemonInfo(pokemonMoment);
         } catch (MalformedURLException ex) {
+            JOptionPane.showMessageDialog(this, "Error: Invalid URL", "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(PrincipalPoke.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btNextActionPerformed
@@ -418,54 +427,57 @@ public class PrincipalPoke extends javax.swing.JFrame {
             Pokemon pokemonMoment = controller.showPokemonInfo(currentPokemonIndex);
             displayPokemonInfo(pokemonMoment);
         } catch (MalformedURLException ex) {
+            JOptionPane.showMessageDialog(this, "Error: Invalid URL", "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(PrincipalPoke.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btBackActionPerformed
     
     // Method to display information of the provided Pokémon on the UI
     public void displayPokemonInfo(Pokemon pokemon) {
-        // Display Pokémon details on UI components
         nameLabel.setText("Name: " + pokemon.getName());
-        List<String> types = pokemon.getTypes();
-        List<String> abilities = pokemon.getAbilities();
-        // Check for abilities and types, update UI accordingly
-        if (abilities.size() >= 1) {
-            abiliti1.setText("Ability 1: " + abilities.get(0));
-            System.out.println("Ability 1: " + abilities.get(0));
-        } else {
-            abiliti1.setText("Ability 1: -");
-            System.out.println("no 1");
+
+    List<String> types = pokemon.getTypes();
+    List<String> abilities = pokemon.getAbilities();
+
+    // Display abilities
+    for (int i = 0; i < 4; i++) {
+        String abilityText = (i < abilities.size()) ? abilities.get(i) : "-";
+        String label = "Ability " + (i + 1) + ": " + abilityText;
+        switch (i) {
+            case 0:
+                abiliti1.setText(label);
+                break;
+            case 1:
+                abiliti2.setText(label);
+                break;
+            case 2:
+                abiliti3.setText(label);
+                break;
+            case 3:
+                abiliti4.setText(label);
+                break;
         }
-    
-        if (abilities.size() >= 2) {
-            abiliti2.setText("Ability 2: " + abilities.get(1));
-            System.out.println("Ability 2: " + abilities.get(1));
+        if (i < abilities.size()) {
+            System.out.println(label);
         } else {
-            abiliti2.setText("Ability 2: -");
-            System.out.println("no 2");
+            System.out.println("no " + (i + 1));
         }
-    
-        if (abilities.size() >= 3) {
-            abiliti3.setText("Ability 3: " + abilities.get(2));
-            System.out.println("Ability 3: " + abilities.get(2));
-        } else {
-            abiliti3.setText("Ability 3: -");
-            System.out.println("no 3");
+    }
+
+    // Display types
+    if (!types.isEmpty()) {
+        StringBuilder typeText = new StringBuilder("Type" + (types.size() > 1 ? "s" : "") + ": ");
+        for (int i = 0; i < types.size(); i++) {
+            typeText.append(types.get(i));
+            if (i < types.size() - 1) {
+                typeText.append(", ");
+            }
         }
-    
-        if (abilities.size() >= 4) {
-            abiliti4.setText("Ability 4: " + abilities.get(3));
-            System.out.println("Ability 4: " + abilities.get(3));
-        } else {
-            abiliti4.setText("Ability 4: -");
-            System.out.println("no 4");
-        }
+        typeLabel.setText(typeText.toString());
 
         if (types.size() == 1) {
-            typeLabel.setText("Type: " + types.get(0));
             typeLabel.setForeground(controller.getColorForType(types.get(0)));
         } else if (types.size() == 2) {
-            typeLabel.setText("Types: " + types.get(0) + ", " + types.get(1));
             Color color1 = controller.getColorForType(types.get(0));
             Color color2 = controller.getColorForType(types.get(1));
             int red = (color1.getRed() + color2.getRed()) / 2;
@@ -473,9 +485,11 @@ public class PrincipalPoke extends javax.swing.JFrame {
             int blue = (color1.getBlue() + color2.getBlue()) / 2;
             typeLabel.setForeground(new Color(red, green, blue));
         }
+    }
 
-        Image pokemonImage = pokemon.getPokemonImage();
-        imgLabel.setIcon(new ImageIcon(pokemonImage));
+    // Display Pokémon image
+    Image pokemonImage = pokemon.getPokemonImage();
+    imgLabel.setIcon(new ImageIcon(pokemonImage));
     }
 
     public static void main(String args[]) {

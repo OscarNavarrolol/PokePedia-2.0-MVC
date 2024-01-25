@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  * Controller class managing interactions between the Model (Pokemon data) and View (User interface).
@@ -35,7 +36,8 @@ public class PokemonController {
     // Searches Pokemon by name
     public void searchPokemonByName(String name) throws MalformedURLException {
         // Retrieves Pokemon index by name and displays information
-        int index = apiConnector.getPokemonIndexByName(name);
+        try {
+            int index = apiConnector.getPokemonIndexByName(name);
         principalPoke.currentPokemonIndex = index;
         if (index != -1) {
 
@@ -46,6 +48,12 @@ public class PokemonController {
            
             System.out.println("pokemon not found");
         }
+            
+        } catch (MalformedURLException e) {
+            JOptionPane.showMessageDialog(null, "Error :( ");
+            e.printStackTrace();
+        }
+        
     }
     
     // Searches Pokemon by code
@@ -64,7 +72,7 @@ public class PokemonController {
     // Retrieves and displays Pokemon information
     public Pokemon showPokemonInfo(int index) throws MalformedURLException {
     // Retrieves Pokemon details and creates a Pokemon object
-        ApiConnector apiConnector = new ApiConnector();
+        
         String name = apiConnector.getPokemonName(index);
         List<String> types = apiConnector.getPokemonTypes(index);
         String imageUrl = apiConnector.getPokemonImage(index);

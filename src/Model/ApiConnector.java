@@ -13,10 +13,13 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 import org.json.JSONArray;
 
 
 public class ApiConnector {
+    
+    private static final String API_BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
     
   // Method to fetch data from the specified API URL  
     private String fetchData(String apiUrl) throws IOException {
@@ -36,8 +39,8 @@ public class ApiConnector {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
-            throw e; 
+            JOptionPane.showMessageDialog(null, "Error in get API: " + e);
+            throw new IOException("Error in get API", e);
         }
 
         return result.toString();
@@ -46,7 +49,7 @@ public class ApiConnector {
     // Retrieves the name of a Pokemon by its index
     public String getPokemonName(int index) {
         // Fetches data and extracts the name of the Pokemon
-        String apiUrl = "https://pokeapi.co/api/v2/pokemon/" + index;
+        String apiUrl = API_BASE_URL + index;
         String name = "";
 
         try {
@@ -64,7 +67,7 @@ public class ApiConnector {
     // Retrieves the types of a Pokemon by its index
     public List<String> getPokemonTypes(int index) {
         // Fetches data and extracts the types of the Pokemon
-        String apiUrl = "https://pokeapi.co/api/v2/pokemon/" + index;
+        String apiUrl = API_BASE_URL + index;
         List<String> types = new ArrayList<>();
 
         try {
@@ -90,9 +93,12 @@ public class ApiConnector {
     public int getPokemonIndexByName(String name) {
         // Fetches data and extracts the index of the Pokemon by name
         int index = -1;
+        if (!name.matches("[a-zA-Z]+")) {
+        throw new IllegalArgumentException("The Pokémon name must contain only alphabetical characters.");
+        }
 
         try {
-            String apiUrl = "https://pokeapi.co/api/v2/pokemon/" + name;
+            String apiUrl = API_BASE_URL + name;
             String result = fetchData(apiUrl);
             JSONObject jsonObject = new JSONObject(result);
             index = jsonObject.getInt("id");
@@ -105,7 +111,7 @@ public class ApiConnector {
     // Retrieves the image URL of a Pokemon by its index
     public String getPokemonImage(int index) {
         // Fetches data and extracts the image URL of the Pokemon
-        String apiUrl = "https://pokeapi.co/api/v2/pokemon/" + index;
+        String apiUrl = API_BASE_URL + index;
         String imageUrl = "";
 
         try {
@@ -127,7 +133,7 @@ public class ApiConnector {
     public List<String> getPokemonAbilities (int index) {
         
         // Fetches data and extracts the abilities of the Pokemon
-        String apiUrl = "https://pokeapi.co/api/v2/pokemon/" + index;
+        String apiUrl = API_BASE_URL + index;
         List<String> abilities = new ArrayList<>();
 
         try {
