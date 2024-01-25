@@ -15,7 +15,16 @@ Pokepedia 2.0 is an enhanced version of the Pokepedia application that allows us
 
 ## Screenshot
 
+- Principal
+[![Principal-1](https://i.postimg.cc/KcJNQGdQ/Screenshot-1.png)](https://postimg.cc/Hj8XkgW7)
+- Principal
+[![Principal-2](https://i.postimg.cc/LstkP2tt/Screenshot-2.png)](https://postimg.cc/f3b0n4gy)
+- Search
 
+[![](https://i.postimg.cc/sDb50vKP/Screenshot-3.png)](https://postimg.cc/kBFV2M0D)
+[![](https://i.postimg.cc/zfzvdNmS/Screenshot-4.png)](https://postimg.cc/xXZ9CW1c)
+[![](https://i.postimg.cc/j20WKk3M/Screenshot-5.png)](https://postimg.cc/gXscH4Wh)
+[![](https://i.postimg.cc/NFk0tGH0/Screenshot-6.png)](https://postimg.cc/XBXWcbxM)
 
 ## Technologies Used
 
@@ -44,7 +53,7 @@ Pokepedia 2.0 is an enhanced version of the Pokepedia application that allows us
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Mail
 - oscardnv123455@gmail.com
